@@ -10,6 +10,10 @@ var rd = require('rd'),
     reader = require('./lib/reader.js');
 
 var query = process.argv[2];
+var key = 'name';
+if (/\d+/.test(query)) {
+    key = 'ctfid';
+}
 
 var files = rd.readSync('data');
 files.shift();
@@ -18,14 +22,10 @@ files.shift();
  * row[Object], csv title lowercase
  * index[Number]
  */
-reader.read(files, function(row, index) {
+reader.read(files, function(row, index, file) {
     // every row info
-    var key = 'name';
-    if (/\d+/.test(query)) {
-        key = 'ctfid';
-    }
     if (row[key] === query) {
-        console.log(JSON.stringify(row));
+        console.log(name, row.ctfid, file);
     }
 }).on('end', function() {
     console.log('data end');
