@@ -17,7 +17,7 @@ files.shift();
  * index[Number]
  */
 reader.read(files, function(row, index) {
-    
+    // every row info
 }).on('end', function() {
     console.log('data end');
 });
